@@ -145,6 +145,13 @@ public class ValueChunk extends Chunk<Chunk.EmptyHeader> {
             m = types.matcher(attrChunk.rawValue);
             if (m.find()) {
                 ValPair vp = new ValPair(m);
+                if (vp.pos == 4) {
+                    try {
+                        int tmp = Integer.parseInt(vp.val);
+                    } catch (NumberFormatException e) {
+                        vp.pos = -1;
+                    }
+                }
                 switch (vp.pos) {
                     case 1:
                         type = ValueType.NULL;
